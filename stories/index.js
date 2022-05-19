@@ -10,6 +10,8 @@ import DayList from "components/DayList.jsx";
 import InterviewerListItem from "components/InterviewerListItem.jsx";
 import InterviewerList from "components/InterviewerList.jsx";
 import Appointment from "components/Appointment/index.jsx";
+import Header from "components/Appointment/Header.jsx";
+import Empty from "components/Appointment/Empty.jsx"
 
 /* BUTTON */
 storiesOf("Button", module)
@@ -108,6 +110,7 @@ storiesOf("InterviewerListItem", module)
   />
 ));
 
+/* INTERVIEWER LIST */
 const interviewers = [
   { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
   { id: 2, name: "Tori Malcolm", avatar: "https://i.imgur.com/Nmx0Qxo.png" },
@@ -138,6 +141,7 @@ storiesOf("InterviewerList", module)
     />
   ));
 
+/* APPOINTMENT */
 storiesOf("Appointment", module)
   .addParameters({
     backgrounds: [{ name: "white", value: "#fff", default: true }]
@@ -148,7 +152,12 @@ storiesOf("Appointment", module)
       time="12pm"
     />
     ));
-  
-  /* 
-  Add a second story to the <Appointment> that passes the <Appointment> component a time prop that is a string. Set the time prop to "12pm".
-  */
+
+storiesOf("Appointment", module)
+  .addParameters({
+    backgrounds: [{ name: "white", value: "#fff", default: true }]
+  })
+  .add("Appointment", () => <Appointment />)
+  .add("Appointment with Time", () => <Appointment time="12pm" />)
+  .add("Header", () => <Header time="12pm"/>)
+  .add("Empty", () => <Empty onAdd={action("onAdd")}/>)
