@@ -1,10 +1,10 @@
 export function getAppointmentsForDay(state, day) {
-  const filteredDay = state.days.filter((dayOfWeek) => dayOfWeek.name === day);
-  
-  if (filteredDay[0]) {
-    const appointmentArr = filteredDay[0].appointments.map((id) => state.appointments[id]);
-    return appointmentArr;
-  } else {
+  const filteredDays = state.days.filter(days => days.name === day);
+
+  if (!filteredDays[0]) {
     return [];
+  } else {
+    const appointmentId = filteredDays[0].appointments.map((appointmentId) => state.appointments[appointmentId]);
+    return appointmentId
   }
-}
+};
