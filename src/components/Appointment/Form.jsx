@@ -5,7 +5,8 @@ import Button from 'components/Button.jsx';
 export default function Form(props) {
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
-  console.log(props.interviewers[1].id);
+  const interviewerId = interviewer ? interviewer.id : null;
+
 
   const reset = () => {
     setStudent("");
@@ -16,7 +17,7 @@ export default function Form(props) {
     reset();
     props.onCancel();
   };
-
+  
   return (
   <main className="appointment__card appointment__card--create">
     <section className="appointment__card-left">
@@ -31,9 +32,9 @@ export default function Form(props) {
         />
       </form>
       <InterviewerList
-        value={interviewer}
+        value={interviewerId}
         interviewers={props.interviewers}
-        onChange={(event)=> {setInterviewer(props.interviewers[event-1].id)}}
+        onChange={(event)=> {setInterviewer(props.interviewers.find(interviewer => interviewer.id === event))}}
       />
     </section>
     <section className="appointment__card-right">
