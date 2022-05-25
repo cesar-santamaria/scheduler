@@ -68,6 +68,7 @@ export default function Application(props) {
       .delete(`/api/appointments/${id}`, appointment)
       .then(() => setState({ ...state, appointments }))
   };
+  
 
   const schedule = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
