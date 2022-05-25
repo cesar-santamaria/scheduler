@@ -12,7 +12,7 @@ export default function Application(props) {
     day: "Monday",
     days: [],
     appointments: {},
-    interviewers: []
+    interviewers: {}
   });
 
   useEffect(()=>{
@@ -40,14 +40,17 @@ export default function Application(props) {
       ...state.appointments[id],
       interview: { ...interview }
     };
+    
     const appointments = {
       ...state.appointments,
       [id]: appointment
     };
-    setState({
-      ...state,
-      appointments
-    });
+    return axios.put(`/api/appointments/${id}`, appointment)
+      .then(()=>setState({...state, appointments}))
+      .catch((error)=>{
+        console.log(error)
+      })
+
   };
 
   const schedule = dailyAppointments.map((appointment) => {

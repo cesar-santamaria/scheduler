@@ -3,10 +3,9 @@ import InterviewerList from 'components/InterviewerList';
 import Button from 'components/Button.jsx';
 
 export default function Form(props) {
+
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
-  const interviewerId = interviewer ? interviewer.id : null;
-
 
   const reset = () => {
     setStudent("");
@@ -32,9 +31,9 @@ export default function Form(props) {
         />
       </form>
       <InterviewerList
-        value={interviewerId}
+        value={interviewer}
         interviewers={props.interviewers}
-        onChange={(event)=> {setInterviewer(props.interviewers.find(interviewer => interviewer.id === event))}}
+        onChange={setInterviewer}
       />
     </section>
     <section className="appointment__card-right">
