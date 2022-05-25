@@ -8,6 +8,19 @@ const useApplicationData = () => {
     appointments: {},
     interviewers: {}
   });
+
+  const countSpots = (appointments) => {
+    return state.days.map((day) => {
+      let count = 0;
+      day.appointments.forEach((appointmentId) => {
+        if (!appointments[appointmentId].interview) {
+          count += 1;
+        }
+      });
+      return { ...day, spots: count };
+    });
+  };
+
   
   const bookInterview = (id, interview) => {
     
@@ -20,10 +33,12 @@ const useApplicationData = () => {
       ...state.appointments,
       [id]: appointment
     };
+
+    const updatedDays = countSpots(appointments);
     
     return axios.put(`/api/appointments/${id}`, appointment)
-      .then(()=>setState({ ...state, appointments }))
-      .catch((error)=>{
+      .then(() => setState ({ ...state, appointments, days: updatedDays }))
+      .catch((error) => {
         console.log(error)
       })
   };
@@ -39,10 +54,12 @@ const useApplicationData = () => {
       ...state.appointments,
       [id]: appointment,
     };
+
+    const updatedDays = countSpots(appointments);
   
     return axios
       .delete(`/api/appointments/${id}`, appointment)
-      .then(() => setState({ ...state, appointments }))
+      .then(() => setState({ ...state, appointments, days: updatedDays }))
   };
   
   const setDay = day => setState({ ...state, day });

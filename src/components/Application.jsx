@@ -8,7 +8,7 @@ import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "help
 
 import "components/Application.scss";
 
-export default function Application(props) {
+export default function Application() {
   const { 
     state, 
     setDay, 
@@ -18,7 +18,6 @@ export default function Application(props) {
 
   const interviewers = getInterviewersForDay(state, state.day);
   const dailyAppointments = getAppointmentsForDay(state, state.day);
-
   const schedule = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
 
@@ -59,6 +58,7 @@ export default function Application(props) {
       </section>
       <section className="schedule">
        {schedule}
+       <Appointment key={'last'} time="5pm"/>
       </section>
     </main>
   );
