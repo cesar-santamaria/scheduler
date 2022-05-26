@@ -1,5 +1,5 @@
 import React from "react";
-import "components/Appointment/Header"
+import "components/Appointment/Header";
 import Header from "components/Appointment/Header";
 import Show from "./Show";
 import Empty from "./Empty";
@@ -13,17 +13,19 @@ import "components/Appointment/styles.scss";
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
-const SAVE = "SAVE"
+const SAVE = "SAVE";
 const EDIT = "EDIT";
 const DELETE = "DELETE";
 const CONFIRM = "CONFIRM";
 const ERROR_SAVE = 'ERROR_SAVE';
 const ERROR_DELETE = 'ERROR_DELETE';
 
-
+// displays appointment article cards
 export default function Appointment(props) {
+   // custom hook that tracks the state of appointment element
   const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY);
 
+    // create/save a user appointment
   const save = (name, interviewer) => {
     const interview = {
       student: name,
@@ -36,6 +38,7 @@ export default function Appointment(props) {
     
   };
 
+  // deletes appointment
   const destroy = () => {
     transition(DELETE, true);
     props.cancelInterview(props.id, props.interview)

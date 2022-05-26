@@ -1,6 +1,7 @@
-import React from 'react'
-import DayListItem from './DayListItem.jsx'
+import React from 'react';
+import DayListItem from './DayListItem.jsx';
 
+// display's sidebar
 export default function DayList(props) {
   const dayListItemArray = props.days.map((day) => 
     <DayListItem 
@@ -14,4 +15,4 @@ export default function DayList(props) {
   return (
     <ul>{dayListItemArray}</ul>
   )
-}
+};

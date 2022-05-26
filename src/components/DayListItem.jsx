@@ -1,7 +1,8 @@
-import React from 'react'
-import "./DayListItem.scss"
+import React from 'react';
+import "./DayListItem.scss";
 import classNames from 'classnames';
 
+// displays items for side menu
 export default function DayListItem(props) {
   const formatSpots = () => {
     if (props.spots === 0) {
@@ -26,4 +27,4 @@ export default function DayListItem(props) {
       <h3 className="text--light">{formatSpots()}</h3>
     </li>
   );
-}
+};

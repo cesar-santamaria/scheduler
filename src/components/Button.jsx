@@ -3,6 +3,7 @@ import classNames from "classnames";
 
 import "components/Button.scss";
 
+// global button used to handle onClicks
 export default function Button(props) {
    const className = classNames( "button", {
       "button--confirm": props.confirm,
@@ -19,4 +20,4 @@ export default function Button(props) {
       {props.children}
    </button>
    );
-}
+};

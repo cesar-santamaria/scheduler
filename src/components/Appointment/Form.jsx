@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import InterviewerList from 'components/InterviewerList';
 import Button from 'components/Button.jsx';
 
+// displays form when user creates/edits an appointment
 export default function Form(props) {
 
+  // tracks interviewer selector and inputs
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState('');
 
+  // Helper functions to reset/cancel inputs
   const reset = () => {
     setStudent("");
     setInterviewer(null);
@@ -18,6 +21,7 @@ export default function Form(props) {
     props.onCancel();
   };
 
+  // handles validation for student/interviewer input fields
   const validate = () => {
     if (student === '') {
       setError('Student name cannot be blank');

@@ -4,11 +4,10 @@ import Appointment from "./Appointment";
 import useApplicationData from "hooks/useApplicationData";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 
-
-
 import "components/Application.scss";
 
 export default function Application() {
+  // a custom hook that handles loading
   const { 
     state, 
     setDay, 
@@ -16,8 +15,11 @@ export default function Application() {
     cancelInterview 
   } = useApplicationData();
 
+  // helper functions that gets appointments/interviewers for day selected
   const interviewers = getInterviewersForDay(state, state.day);
   const dailyAppointments = getAppointmentsForDay(state, state.day);
+
+   // displays the day's schedule
   const schedule = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
 

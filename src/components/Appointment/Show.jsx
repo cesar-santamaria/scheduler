@@ -1,5 +1,6 @@
-import React from 'react'
+import React from 'react';
 
+// displays appointment card depending on mode
 export default function Show(props) {
 
   return (

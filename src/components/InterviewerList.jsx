@@ -1,11 +1,10 @@
 import React from "react";
 import InterviewerListItem from "./InterviewerListItem";
 
-import "./InterviewerList.scss"
+import "./InterviewerList.scss";
 
-
+// displays clickable interviewer
 export default function InterviewerList(props) {
-
   const interviewersArray = props.interviewers.map((interviewer) => {
     
     return <InterviewerListItem 
