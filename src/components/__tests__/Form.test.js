@@ -10,7 +10,7 @@ describe('Form', () => {
   const interviewers = [
     {
       id: 1,
-      student: 'Sylvia Palmer',
+      name: 'Sylvia Palmer',
       avatar: 'https://i.imgur.com/LpaY82x.png',
     },
   ];
@@ -39,7 +39,7 @@ describe('Form', () => {
   it('validates that the interviewer cannot be null', () => {
     const onSave = jest.fn();
 
-    const { getByText } = render(<Form interviewers={interviewers} student={'Lydia Miller-Jones'} onSave={onSave} interviewer={null} />);
+    const { getByText } = render(<Form interviewers={interviewers} student={'Lydia Miller-Jones'} onSave={onSave} />);
 
     fireEvent.click(getByText('Save'));
 
@@ -47,16 +47,30 @@ describe('Form', () => {
     expect(onSave).not.toHaveBeenCalled();
   });
 
-  it('calls onSave function when the name and interviewer is defined', () => {
+  it('can successfully save after trying to submit an empty student name', () => {
     const onSave = jest.fn();
 
-    const { queryByText, getByText } = render(<Form interviewers={interviewers} student={'Lydia Miller-Jones'} onSave={onSave} interviewer={interviewers[0].id} />);
+    const { getByText, getByPlaceholderText, queryByText, getByAltText } = render(<Form interviewers={interviewers} onSave={onSave} />);
+
+    fireEvent.click(getByText('Save'));
+
+    expect(getByText(/student name cannot be blank/i)).toBeInTheDocument();
+    expect(onSave).not.toHaveBeenCalled();
+
+    fireEvent.change(getByPlaceholderText('Enter Student Name'), {
+      target: { value: 'Lydia Miller-Jones' },
+    });
 
     fireEvent.click(getByText('Save'));
 
     expect(queryByText(/student name cannot be blank/i)).toBeNull();
-    expect(queryByText(/please select an interviewer/i)).toBeNull();
+    expect(queryByText(/Please select an interviewer/i)).not.toBeNull();
+
+    expect(onSave).not.toHaveBeenCalled();
+
+    fireEvent.click(getByAltText(interviewers[0].name));
+    fireEvent.click(getByText('Save'));
     expect(onSave).toHaveBeenCalledTimes(1);
-    expect(onSave).toHaveBeenCalledWith('Lydia Miller-Jones', 1);
+    expect(onSave).toHaveBeenCalledWith('Lydia Miller-Jones', interviewers[0].id);
   });
 });
