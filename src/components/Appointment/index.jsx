@@ -42,7 +42,6 @@ export default function Appointment(props) {
       .then(() => transition(EMPTY))
       .catch(() => transition(ERROR_DELETE, true));
   };
-  console.log(props.time)
 
   return (
     <article className="appointment">
