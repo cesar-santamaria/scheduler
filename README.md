@@ -26,8 +26,7 @@ Interview Scheduler is a single page React application that allows users to book
 - cypress
 - eslint-plugin-cypress
 ## Setup
-
-Install dependencies with `npm install`.
+In order to run this project locally you will need both the scheduler and scheduler-api. The server instructions can be found here https://github.com/cesar-santamaria/scheduler-api
 
 ## Running Webpack Development Server
 
